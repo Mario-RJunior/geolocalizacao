@@ -31,3 +31,26 @@ def converte_endereco(endereco):
     loc = geolocator.geocode(endereco + ',' + pais)
 
     return loc.latitude, loc.longitude
+
+
+def calcula_rota(dataframe, origem):
+    enderecos = dataframe['endereco_completo'].to_list()
+    inicio = origem
+    dic = {}
+
+    while len(enderecos) > 0:
+
+        for end in enderecos:
+            coord_inicio = converte_endereco(inicio)
+            coord = converte_endereco(end)
+            distancia = geopy.distance.distance(coord_inicio, coord).km
+
+            dic[end] = distancia
+
+        mais_perto = min(dic, key=dic.get)
+        enderecos.remove(str(mais_perto))
+        inicio = mais_perto
+        pprint(dic)
+        dic.clear()
+        print(mais_perto)
+        print('-=' * 50)
