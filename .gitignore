@@ -1,2 +1,4 @@
 .idea
 __pycache__
+__pycache__/banco_dados.cpython-37.pyc
+__pycache__/geolocalizador.cpython-37.pyc
