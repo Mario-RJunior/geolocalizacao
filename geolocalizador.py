@@ -36,10 +36,16 @@ def converte_endereco(endereco):
 
 
 def agrupa_visitas(num_equipes, dataframe):
-    x = dataframe.iloc[:, [8, 9]].values
+
+    serie = dataframe['endereco_completo'].apply(converte_endereco)
+    dataframe['latitude'] = serie.apply(lambda lat: lat[0])
+    dataframe['longitude'] = serie.apply(lambda lon: lon[1])
+
+    x = dataframe.loc[:, ['latitude', 'longitude']].values
     kmeans = KMeans(n_clusters=num_equipes, random_state=0)
     previsoes = kmeans.fit_predict(x)
     dataframe['equipes'] = previsoes
+    
     return dataframe
 
 
