@@ -3,6 +3,7 @@ from geopy.geocoders import Nominatim
 import geopy.distance
 from banco_dados import listar
 from pprint import pprint
+from sklearn.cluster import KMeans
 
 
 def acessa_bd():
@@ -34,8 +35,12 @@ def converte_endereco(endereco):
     return loc.latitude, loc.longitude
 
 
-def agrupa_visitas(equipes):
-    pass
+def agrupa_visitas(num_equipes, dataframe):
+    x = dataframe.iloc[:, [8, 9]].values
+    kmeans = KMeans(n_clusters=num_equipes, random_state=0)
+    previsoes = kmeans.fit_predict(x)
+    dataframe['equipes'] = previsoes
+    return dataframe
 
 
 def calcula_rota(dataframe, origem):
