@@ -4,6 +4,8 @@ import geopy.distance
 from banco_dados import listar
 from pprint import pprint
 from sklearn.cluster import KMeans
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 
 def acessa_bd():
@@ -28,7 +30,7 @@ def gera_dataframe(dado):
 
 
 def converte_endereco(endereco):
-    geolocator = Nominatim(user_agent="my_user_agent", timeout=10)
+    geolocator = Nominatim(user_agent="my_user_agent", timeout=20)
     pais = "BR"
     loc = geolocator.geocode(endereco + ',' + pais)
 
@@ -36,7 +38,6 @@ def converte_endereco(endereco):
 
 
 def agrupa_visitas(num_equipes, dataframe):
-
     serie = dataframe['endereco_completo'].apply(converte_endereco)
     dataframe['latitude'] = serie.apply(lambda lat: lat[0])
     dataframe['longitude'] = serie.apply(lambda lon: lon[1])
@@ -45,8 +46,16 @@ def agrupa_visitas(num_equipes, dataframe):
     kmeans = KMeans(n_clusters=num_equipes, random_state=0)
     previsoes = kmeans.fit_predict(x)
     dataframe['equipes'] = previsoes
-    
+
     return dataframe
+
+
+def scatter_plot(dataframe):
+    sns.scatterplot(data=dataframe,
+                    y='latitude',
+                    x='longitude',
+                    hue='equipes')
+    plt.show()
 
 
 def calcula_rota(dataframe, origem):
