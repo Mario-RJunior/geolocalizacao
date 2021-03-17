@@ -2,6 +2,7 @@ import pandas as pd
 from geopy.geocoders import Nominatim
 import geopy.distance
 from banco_dados import listar
+from pprint import pprint
 
 
 def acessa_bd():
@@ -31,6 +32,10 @@ def converte_endereco(endereco):
     loc = geolocator.geocode(endereco + ',' + pais)
 
     return loc.latitude, loc.longitude
+
+
+def agrupa_visitas(equipes):
+    pass
 
 
 def calcula_rota(dataframe, origem):
