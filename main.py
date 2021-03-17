@@ -6,5 +6,5 @@ if __name__ == '__main__':
     perg_local = str(input('Digite a localização (Bairro, Cidade - UF): '))
     perg_equipes = int(input('Quantas equipes disponíveis para visitas? '))
     df = agrupa_visitas(perg_equipes, df)
-    print(df)
+    scatter_plot(df)
     #calcula_rota(df, perg_local)
