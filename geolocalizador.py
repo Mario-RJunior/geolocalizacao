@@ -50,7 +50,7 @@ def agrupa_visitas(num_equipes, dataframe):
     return dataframe
 
 
-def scatter_plot(dataframe):
+def map_plot(dataframe):
     lat = dataframe['latitude'].to_list()
     lon = dataframe['longitude'].to_list()
 
