@@ -51,16 +51,35 @@ def agrupa_visitas(num_equipes, dataframe):
 
 
 def map_plot(dataframe):
+    paleta_cores = ['red', 'blue', 'green', 'orange', 'pink']
     lat = dataframe['latitude'].to_list()
     lon = dataframe['longitude'].to_list()
+    equipes = dataframe['equipes'].to_list()
 
-    coordenadas = list(zip(lat, lon))
+    coordenadas = list(zip(lat, lon, equipes))
 
     m = folium.Map(location=[-20.2999473, -40.3221028], zoom_start=12)
     for loc in coordenadas:
-        folium.Marker(location=loc,
-                      icon=folium.Icon(color='red')
-                      ).add_to(m)
+        if loc[2] == 0:
+            folium.Marker(location=(loc[0], loc[1]),
+                          icon=folium.Icon(color=paleta_cores[0])
+                          ).add_to(m)
+        elif loc[2] == 1:
+            folium.Marker(location=(loc[0], loc[1]),
+                          icon=folium.Icon(color=paleta_cores[1])
+                          ).add_to(m)
+        elif loc[2] == 2:
+            folium.Marker(location=(loc[0], loc[1]),
+                          icon=folium.Icon(color=paleta_cores[2])
+                          ).add_to(m)
+        elif loc[2] == 3:
+            folium.Marker(location=(loc[0], loc[1]),
+                          icon=folium.Icon(color=paleta_cores[3])
+                          ).add_to(m)
+        else:
+            folium.Marker(location=(loc[0], loc[1]),
+                          icon=folium.Icon(color=paleta_cores[4])
+                          ).add_to(m)
     m.save('map.html')
     webbrowser.open('map.html', new=2)
 
