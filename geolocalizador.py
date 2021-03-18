@@ -4,8 +4,8 @@ import geopy.distance
 from banco_dados import listar
 from pprint import pprint
 from sklearn.cluster import KMeans
-import seaborn as sns
-import matplotlib.pyplot as plt
+import folium
+import webbrowser
 
 
 def acessa_bd():
@@ -51,11 +51,18 @@ def agrupa_visitas(num_equipes, dataframe):
 
 
 def scatter_plot(dataframe):
-    sns.scatterplot(data=dataframe,
-                    y='latitude',
-                    x='longitude',
-                    hue='equipes')
-    plt.show()
+    lat = dataframe['latitude'].to_list()
+    lon = dataframe['longitude'].to_list()
+
+    coordenadas = list(zip(lat, lon))
+
+    m = folium.Map(location=[-20.2999473, -40.3221028], zoom_start=12)
+    for loc in coordenadas:
+        folium.Marker(location=loc,
+                      icon=folium.Icon(color='red')
+                      ).add_to(m)
+    m.save('map.html')
+    webbrowser.open('map.html', new=2)
 
 
 def calcula_rota(dataframe, origem):
