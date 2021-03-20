@@ -23,12 +23,12 @@ def desconectar(conn):
 
 
 # Listando as informações do banco de dados
-def listar():
+def listar(data):
     """
     Função para listar os produtos
     """
 
-    sql = 'select * from visitas'
+    sql = f'select * from visitas WHERE data_visita = STR_TO_DATE( "{data}", "%d/%m/%Y")'
 
     conn = conectar()
     cursor = conn.cursor()
