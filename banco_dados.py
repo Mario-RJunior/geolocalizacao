@@ -28,9 +28,11 @@ def listar():
     Função para listar os produtos
     """
 
+    sql = 'select * from visitas'
+
     conn = conectar()
     cursor = conn.cursor()
-    cursor.execute('select * from visitas')
+    cursor.execute(sql)
     pacientes = cursor.fetchall()  # Vai pegar o resultado do comando anterior e transformar em uma lista!
 
     ids = []
