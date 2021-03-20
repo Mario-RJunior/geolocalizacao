@@ -8,16 +8,12 @@ import folium
 import webbrowser
 
 
-def acessa_bd():
-    dados = {'id': listar()[0],
-             'Nome': listar()[1],
-             'Rua': listar()[2],
-             'Numero_rua': listar()[3],
-             'Bairro': listar()[4],
-             'Cidade': listar()[5],
-             'Estado': listar()[6],
-             'Data': listar()[7]
-             }
+def acessa_bd(data):
+    colunas = ['id', 'Nome', 'Rua', 'Numero_rua', 'Bairro', 'Cidade', 'Estado', 'Data']
+    lista_dados = list(zip(colunas, listar(data)))
+    dados = {}
+    for c in lista_dados:
+        dados[c[0]] = c[1]
     return dados
 
 
