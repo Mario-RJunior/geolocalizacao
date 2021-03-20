@@ -34,12 +34,6 @@ def converte_endereco(endereco):
     return loc.latitude, loc.longitude
 
 
-def formata_data(dataframe, data):
-    d = pd.to_datetime(data).date()
-    dataframe = dataframe[dataframe['Data'] == d]
-    return dataframe
-
-
 def agrupa_visitas(num_equipes, dataframe):
     serie = dataframe['endereco_completo'].apply(converte_endereco)
     dataframe['latitude'] = serie.apply(lambda lat: lat[0])
