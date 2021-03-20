@@ -40,6 +40,7 @@ def listar():
     bairros = []
     cidades = []
     estados = []
+    datas = []
 
     if len(pacientes) > 0:
 
@@ -51,9 +52,10 @@ def listar():
             bairros.append(paciente[4])
             cidades.append(paciente[5])
             estados.append(paciente[6])
+            datas.append(paciente[7])
 
     else:
         print('Registro não encontrado!')
     desconectar(conn)
 
-    return ids, nomes, ruas, numeros, bairros, cidades, estados
+    return ids, nomes, ruas, numeros, bairros, cidades, estados, datas
