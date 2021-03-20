@@ -15,7 +15,8 @@ def acessa_bd():
              'Numero_rua': listar()[3],
              'Bairro': listar()[4],
              'Cidade': listar()[5],
-             'Estado': listar()[6]
+             'Estado': listar()[6],
+             'Data': listar()[7]
              }
     return dados
 
