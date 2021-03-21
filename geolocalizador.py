@@ -49,9 +49,9 @@ def agrupa_visitas(num_equipes, dataframe):
 
 
 def map_plot(dataframe):
-    paleta_cores = ('blue', 'orange', 'darkred', 'beige', 'cadetblue', 'darkpurple',
-                    'lightred', 'pink', 'darkgreen', 'purple', 'darkblue', 'black',
-                    'red', 'lightblue', 'lightgreen', 'green', 'lightgray', 'gray',
+    paleta_cores = ('blue', 'orange', 'darkred', 'pink', 'lightgreen', 'cadetblue',
+                    'darkpurple', 'lightred', 'darkgreen', 'purple', 'darkblue', 'black',
+                    'red', 'lightblue', 'beige', 'green', 'lightgray', 'gray',
                     'white')
 
     lat = dataframe['latitude'].to_list()
