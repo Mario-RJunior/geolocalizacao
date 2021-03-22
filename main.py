@@ -9,4 +9,4 @@ if __name__ == '__main__':
     df = gera_dataframe(bd)
     df = agrupa_visitas(perg_equipes, df)
     map_plot(df, perg_local)
-    #calcula_rota(df, perg_local)
+    calcula_rota(df, perg_local)
