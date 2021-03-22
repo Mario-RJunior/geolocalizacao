@@ -48,7 +48,7 @@ def agrupa_visitas(num_equipes, dataframe):
     return dataframe
 
 
-def map_plot(dataframe):
+def map_plot(dataframe, origem):
     paleta_cores = ('blue', 'orange', 'darkred', 'pink', 'darkpurple', 'cadetblue',
                     'lightred', 'darkgreen', 'purple', 'darkblue', 'black', 'red',
                     'lightblue', 'beige', 'green', 'lightgray', 'lightgreen', 'gray',
@@ -57,6 +57,7 @@ def map_plot(dataframe):
     lat = dataframe['latitude'].to_list()
     lon = dataframe['longitude'].to_list()
     equipes = dataframe['equipes'].to_list()
+    coord_origem = converte_endereco(origem)
 
     coordenadas = list(zip(lat, lon, equipes))
 
@@ -65,6 +66,11 @@ def map_plot(dataframe):
         folium.Marker(location=(loc[0], loc[1]),
                       icon=folium.Icon(color=paleta_cores[loc[2]])
                       ).add_to(m)
+
+    folium.Marker(location=(coord_origem[0], coord_origem[1]),
+                  icon=folium.Icon(color='darkgreen', icon='medkit', prefix="fa")
+                  ).add_to(m)
+
     m.save('map.html')
     webbrowser.open('map.html', new=2)
 
