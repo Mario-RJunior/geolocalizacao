@@ -6,6 +6,7 @@ from pprint import pprint
 from sklearn.cluster import KMeans
 import folium
 import webbrowser
+import numpy as np
 
 
 def acessa_bd(data):
@@ -76,23 +77,31 @@ def map_plot(dataframe, origem):
 
 
 def calcula_rota(dataframe, origem):
-    enderecos = dataframe['endereco_completo'].to_list()
-    inicio = origem
-    dic = {}
+    grupos = np.sort(dataframe['equipes'].unique())
 
-    while len(enderecos) > 0:
+    for g in grupos:
 
-        for end in enderecos:
-            coord_inicio = converte_endereco(inicio)
-            coord = converte_endereco(end)
-            distancia = geopy.distance.distance(coord_inicio, coord).km
+        print(f'Grupo: {g}')
+        print()
 
-            dic[end] = distancia
+        incio = origem
+        df = dataframe.query(f'equipes == {g}')
+        enderecos = df['endereco_completo'].to_list()
+        dic = {}
 
-        mais_perto = min(dic, key=dic.get)
-        enderecos.remove(str(mais_perto))
-        inicio = mais_perto
-        pprint(dic)
-        dic.clear()
-        print(mais_perto)
+        while len(enderecos) > 0:
+    
+            for end in enderecos:
+                coord_inicio = converte_endereco(incio)
+                coord = converte_endereco(end)
+                distancia = geopy.distance.distance(coord_inicio, coord).km
+    
+                dic[end] = distancia
+
+            mais_perto = min(dic, key=dic.get)
+            enderecos.remove(str(mais_perto))
+            incio = mais_perto
+            pprint(dic)
+            dic.clear()
+            print(mais_perto)
         print('-=' * 50)
