@@ -7,6 +7,7 @@ from sklearn.cluster import SpectralClustering
 import folium
 import webbrowser
 import numpy as np
+from math import ceil
 
 
 def acessa_bd(data):
@@ -37,7 +38,9 @@ def converte_endereco(endereco):
 
 
 def agrupa_visitas(num_equipes, dataframe):
+    qtd_visitas_cluster = ceil(dataframe.shape[0] / num_equipes)
     serie = dataframe['endereco_completo'].apply(converte_endereco)
+
     dataframe['latitude'] = serie.apply(lambda lat: lat[0])
     dataframe['longitude'] = serie.apply(lambda lon: lon[1])
 
@@ -47,7 +50,7 @@ def agrupa_visitas(num_equipes, dataframe):
                                     assign_labels="discretize",
                                     random_state=0,
                                     affinity='nearest_neighbors',
-                                    n_neighbors=3).fit(x)
+                                    n_neighbors=qtd_visitas_cluster).fit(x)
 
     previsoes = clustering.fit_predict(x)
     dataframe['equipes'] = previsoes
