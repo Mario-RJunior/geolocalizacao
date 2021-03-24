@@ -3,7 +3,7 @@ from geopy.geocoders import Nominatim
 import geopy.distance
 from banco_dados import listar
 from pprint import pprint
-from sklearn.cluster import KMeans
+from sklearn.cluster import SpectralClustering
 import folium
 import webbrowser
 import numpy as np
@@ -42,8 +42,14 @@ def agrupa_visitas(num_equipes, dataframe):
     dataframe['longitude'] = serie.apply(lambda lon: lon[1])
 
     x = dataframe.loc[:, ['latitude', 'longitude']].values
-    kmeans = KMeans(n_clusters=num_equipes, random_state=0)
-    previsoes = kmeans.fit_predict(x)
+
+    clustering = SpectralClustering(n_clusters=num_equipes,
+                                    assign_labels="discretize",
+                                    random_state=0,
+                                    affinity='nearest_neighbors',
+                                    n_neighbors=3).fit(x)
+
+    previsoes = clustering.fit_predict(x)
     dataframe['equipes'] = previsoes
 
     return dataframe
