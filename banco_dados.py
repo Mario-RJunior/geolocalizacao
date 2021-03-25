@@ -4,7 +4,7 @@ import MySQLdb
 # Fazendo a conexão com o banco de dados
 def conectar():
     """
-    Função para conectar ao servidor
+    Função para conectar ao servidor.
     """
     try:
         conn = MySQLdb.connect(db='pacientes', host='localhost', user='root', password='')
@@ -25,7 +25,7 @@ def desconectar(conn):
 # Listando as informações do banco de dados
 def listar(data):
     """
-    Função para listar os produtos
+    Função para listar as informações dos pacientes.
     """
 
     sql = f'select * from visitas WHERE data_visita = STR_TO_DATE( "{data}", "%d/%m/%Y")'
