@@ -90,7 +90,7 @@ def calcula_rota(dataframe, origem):
 
     for g in grupos:
 
-        print(f'Grupo: {g}')
+        print(f'Grupo: {g + 1}')
         print()
 
         incio = origem
