@@ -15,3 +15,6 @@ if __name__ == '__main__':
 
     except ValueError:
         print('Valor incorreto. Preencher novamente.')
+
+    except AttributeError:
+        print('AttributeError')
