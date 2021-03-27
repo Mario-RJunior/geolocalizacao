@@ -1,7 +1,6 @@
 import MySQLdb
 
 
-# Fazendo a conexão com o banco de dados
 def conectar():
     """
     Função para conectar ao servidor.
@@ -13,7 +12,6 @@ def conectar():
         print(f'Erro na conexão ao MySQL Server: {e}.')
 
 
-# Encerrando a conexão com o banco de dados
 def desconectar(conn):
     """
     Função para desconectar do servidor.
@@ -22,7 +20,6 @@ def desconectar(conn):
         conn.close()
 
 
-# Listando as informações do banco de dados
 def listar(data):
     """
     Função para listar as informações dos pacientes.
