@@ -97,6 +97,7 @@ def calcula_rota(dataframe, origem):
         df = dataframe.query(f'equipes == {g}')
         enderecos = df['endereco_completo'].to_list()
         dic = {}
+        traj_min = 0
 
         while len(enderecos) > 0:
     
@@ -108,9 +109,12 @@ def calcula_rota(dataframe, origem):
                 dic[end] = distancia
 
             mais_perto = min(dic, key=dic.get)
+            traj_min += dic[mais_perto]
             enderecos.remove(str(mais_perto))
             incio = mais_perto
             pprint(dic)
             dic.clear()
             print(mais_perto)
+        print()
+        print(f'Trajeto mínino: {traj_min}')
         print('-=' * 50)
