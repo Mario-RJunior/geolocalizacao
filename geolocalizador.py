@@ -38,86 +38,105 @@ def converte_endereco(endereco):
 
 
 def agrupa_visitas(num_equipes, dataframe):
-    qtd_visitas_cluster = ceil(dataframe.shape[0] / num_equipes)
-    serie = dataframe['endereco_completo'].apply(converte_endereco)
 
-    dataframe['latitude'] = serie.apply(lambda lat: lat[0])
-    dataframe['longitude'] = serie.apply(lambda lon: lon[1])
+    try:
 
-    x = dataframe.loc[:, ['latitude', 'longitude']].values
+        qtd_visitas_cluster = ceil(dataframe.shape[0] / num_equipes)
+        serie = dataframe['endereco_completo'].apply(converte_endereco)
 
-    clustering = SpectralClustering(n_clusters=num_equipes,
-                                    assign_labels="discretize",
-                                    random_state=0,
-                                    affinity='nearest_neighbors',
-                                    n_neighbors=qtd_visitas_cluster).fit(x)
+        dataframe['latitude'] = serie.apply(lambda lat: lat[0])
+        dataframe['longitude'] = serie.apply(lambda lon: lon[1])
 
-    previsoes = clustering.fit_predict(x)
-    dataframe['equipes'] = previsoes
+        x = dataframe.loc[:, ['latitude', 'longitude']].values
 
-    return dataframe
+        clustering = SpectralClustering(n_clusters=num_equipes,
+                                        assign_labels="discretize",
+                                        random_state=0,
+                                        affinity='nearest_neighbors',
+                                        n_neighbors=qtd_visitas_cluster).fit(x)
+
+        previsoes = clustering.fit_predict(x)
+        dataframe['equipes'] = previsoes
+
+        return dataframe
+
+    except TypeError:
+
+        print('Número de grupos maior do que o número de visitas. Tente novamente.')
 
 
 def map_plot(dataframe, origem):
-    paleta_cores = ('blue', 'orange', 'darkred', 'pink', 'darkpurple', 'cadetblue',
-                    'lightred', 'darkgreen', 'purple', 'darkblue', 'black', 'red',
-                    'lightblue', 'beige', 'green', 'lightgray', 'lightgreen', 'gray',
-                    'white')
+    try:
 
-    lat = dataframe['latitude'].to_list()
-    lon = dataframe['longitude'].to_list()
-    equipes = dataframe['equipes'].to_list()
-    coord_origem = converte_endereco(origem)
+        paleta_cores = ('blue', 'orange', 'darkred', 'pink', 'darkpurple', 'cadetblue',
+                        'lightred', 'darkgreen', 'purple', 'darkblue', 'black', 'red',
+                        'lightblue', 'beige', 'green', 'lightgray', 'lightgreen', 'gray',
+                        'white')
 
-    coordenadas = list(zip(lat, lon, equipes))
+        lat = dataframe['latitude'].to_list()
+        lon = dataframe['longitude'].to_list()
+        equipes = dataframe['equipes'].to_list()
+        coord_origem = converte_endereco(origem)
 
-    m = folium.Map(location=[-20.2999473, -40.3221028], zoom_start=12)
-    for loc in coordenadas:
-        folium.Marker(location=(loc[0], loc[1]),
-                      icon=folium.Icon(color=paleta_cores[loc[2]], icon='user', prefix="fa")
+        coordenadas = list(zip(lat, lon, equipes))
+
+        m = folium.Map(location=[-20.2999473, -40.3221028], zoom_start=12)
+        for loc in coordenadas:
+            folium.Marker(location=(loc[0], loc[1]),
+                          icon=folium.Icon(color=paleta_cores[loc[2]], icon='user', prefix="fa")
+                          ).add_to(m)
+
+        folium.Marker(location=(coord_origem[0], coord_origem[1]),
+                      icon=folium.Icon(color='darkgreen', icon='medkit', prefix="fa")
                       ).add_to(m)
 
-    folium.Marker(location=(coord_origem[0], coord_origem[1]),
-                  icon=folium.Icon(color='darkgreen', icon='medkit', prefix="fa")
-                  ).add_to(m)
+        m.save('map.html')
+        webbrowser.open('map.html', new=2)
 
-    m.save('map.html')
-    webbrowser.open('map.html', new=2)
+    except TypeError:
+
+        print('Erro ao gerar o mapa. Tente novamente.')
 
 
 def calcula_rota(dataframe, origem):
-    grupos = np.sort(dataframe['equipes'].unique())
+    try:
 
-    for g in grupos:
+        grupos = np.sort(dataframe['equipes'].unique())
 
-        print(f'Grupo: {g + 1}')
-        print()
+        for g in grupos:
 
-        incio = origem
-        df = dataframe.query(f'equipes == {g}')
-        enderecos = df['endereco_completo'].to_list()
-        dic = {}
-        traj_min = 0
+            print(f'Grupo: {g + 1}')
+            print()
 
-        while len(enderecos) > 0:
-    
-            for end in enderecos:
-                coord_inicio = converte_endereco(incio)
-                coord = converte_endereco(end)
-                distancia = geopy.distance.distance(coord_inicio, coord).km
-    
-                dic[end] = distancia
+            incio = origem
+            df = dataframe.query(f'equipes == {g}')
+            enderecos = df['endereco_completo'].to_list()
+            dic = {}
+            traj_min = 0
 
-            mais_perto = min(dic, key=dic.get)
-            traj_min += dic[mais_perto]
+            while len(enderecos) > 0:
 
-            enderecos.remove(str(mais_perto))
-            incio = mais_perto
+                for end in enderecos:
+                    coord_inicio = converte_endereco(incio)
+                    coord = converte_endereco(end)
+                    distancia = geopy.distance.distance(coord_inicio, coord).km
 
-            pprint(dic)
-            dic.clear()
+                    dic[end] = distancia
 
-            print(mais_perto)
-        print()
-        print(f'Trajeto mínino: {traj_min}')
-        print('-=' * 50)
+                mais_perto = min(dic, key=dic.get)
+                traj_min += dic[mais_perto]
+
+                enderecos.remove(str(mais_perto))
+                incio = mais_perto
+
+                pprint(dic)
+                dic.clear()
+
+                print(mais_perto)
+            print()
+            print(f'Trajeto mínino: {traj_min}')
+            print('-=' * 50)
+
+    except TypeError:
+
+        print('Erro ao calcular as rotas.')
