@@ -41,22 +41,32 @@ def agrupa_visitas(num_equipes, dataframe):
 
     try:
 
-        qtd_visitas_cluster = ceil(dataframe.shape[0] / num_equipes)
         serie = dataframe['endereco_completo'].apply(converte_endereco)
 
         dataframe['latitude'] = serie.apply(lambda lat: lat[0])
         dataframe['longitude'] = serie.apply(lambda lon: lon[1])
 
-        x = dataframe.loc[:, ['latitude', 'longitude']].values
+        if len(dataframe) == 0:
 
-        clustering = SpectralClustering(n_clusters=num_equipes,
-                                        assign_labels="discretize",
-                                        random_state=0,
-                                        affinity='nearest_neighbors',
-                                        n_neighbors=qtd_visitas_cluster).fit(x)
+            print('Não há registros encontrados.')
 
-        previsoes = clustering.fit_predict(x)
-        dataframe['equipes'] = previsoes
+        elif len(dataframe) == 1:
+
+            dataframe['equipes'] = 0
+
+        else:
+
+            qtd_visitas_cluster = ceil(dataframe.shape[0] / num_equipes)
+            x = dataframe.loc[:, ['latitude', 'longitude']].values
+
+            clustering = SpectralClustering(n_clusters=num_equipes,
+                                            assign_labels="discretize",
+                                            random_state=0,
+                                            affinity='nearest_neighbors',
+                                            n_neighbors=qtd_visitas_cluster).fit(x)
+
+            previsoes = clustering.fit_predict(x)
+            dataframe['equipes'] = previsoes
 
         return dataframe
 
