@@ -56,14 +56,14 @@ def agrupa_visitas(num_equipes, dataframe):
 
         else:
 
-            qtd_visitas_cluster = ceil(dataframe.shape[0] / num_equipes)
+            # qtd_visitas_cluster = ceil(dataframe.shape[0] / num_equipes)
             x = dataframe.loc[:, ['latitude', 'longitude']].values
 
             clustering = SpectralClustering(n_clusters=num_equipes,
                                             assign_labels="discretize",
                                             random_state=0,
                                             affinity='nearest_neighbors',
-                                            n_neighbors=qtd_visitas_cluster).fit(x)
+                                            n_neighbors=3).fit(x)
 
             previsoes = clustering.fit_predict(x)
             dataframe['equipes'] = previsoes
