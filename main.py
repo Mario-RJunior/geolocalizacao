@@ -18,5 +18,15 @@ if __name__ == '__main__':
         bd = acessa_bd(perg_data)
         df = gera_dataframe(bd)
         df = agrupa_visitas(perg_equipes, df)
-        map_plot(df, perg_local)
-        calcula_rota(df, perg_local)
+
+        try:
+
+            map_plot(df, perg_local)
+
+        except AttributeError:
+
+            print('Erro no endereço de origem. Tente novamente.')
+
+        else:
+
+            calcula_rota(df, perg_local)
