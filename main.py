@@ -28,6 +28,7 @@ if __name__ == '__main__':
             print('Erro no endereço de origem. Tente novamente.')
 
         except KeyError:
+
             print('Erro na data. Tente novamente.')
 
         else:
