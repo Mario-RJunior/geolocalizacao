@@ -48,7 +48,7 @@ def agrupa_visitas(num_equipes, dataframe):
 
         if len(dataframe) == 0:
 
-            print('Não há registros encontrados.')
+            pass
 
         elif len(dataframe) == 1:
 
