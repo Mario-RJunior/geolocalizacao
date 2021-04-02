@@ -1,5 +1,6 @@
 import streamlit as st
 from geolocalizador import *
+from streamlit_folium import folium_static
 
 st.title('Mapster')
 st.sidebar.title('Menu')
@@ -12,4 +13,5 @@ if __name__ == '__main__':
     bd = acessa_bd(data)
     df = gera_dataframe(bd)
     df = agrupa_visitas(equipes, df)
-    st.write(df)
+    m = map_plot(df, origem)
+    folium_static(m)
