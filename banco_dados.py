@@ -25,7 +25,7 @@ def listar(data):
     Função para listar as informações dos pacientes.
     """
 
-    sql = f'select * from visitas WHERE data_visita = STR_TO_DATE( "{data}", "%Y-%m-%d")'
+    sql = f'select * from visitas WHERE data_visita = STR_TO_DATE("{data}", "%Y-%m-%d")'
 
     conn = conectar()
     cursor = conn.cursor()
