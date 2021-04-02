@@ -5,9 +5,9 @@ from banco_dados import listar
 from pprint import pprint
 from sklearn.cluster import SpectralClustering
 import folium
-import webbrowser
 import numpy as np
-from math import ceil
+# import webbrowser
+# from math import ceil
 
 
 def acessa_bd(data):
@@ -38,7 +38,6 @@ def converte_endereco(endereco):
 
 
 def agrupa_visitas(num_equipes, dataframe):
-
     try:
 
         serie = dataframe['endereco_completo'].apply(converte_endereco)
@@ -100,8 +99,9 @@ def map_plot(dataframe, origem):
                       icon=folium.Icon(color='darkgreen', icon='medkit', prefix="fa")
                       ).add_to(m)
 
-        m.save('map.html')
-        webbrowser.open('map.html', new=2)
+        # m.save('map.html')
+        # webbrowser.open('map.html', new=2)
+        return m
 
     except TypeError:
 
