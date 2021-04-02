@@ -1,4 +1,5 @@
 import streamlit as st
+from geolocalizador import *
 
 st.title('Mapster')
 st.sidebar.title('Menu')
