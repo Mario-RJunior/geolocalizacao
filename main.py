@@ -17,7 +17,8 @@ if __name__ == '__main__':
 
         bd = acessa_bd()
         df = gera_dataframe(bd)
-        df = agrupa_visitas(perg_equipes, df)
+        df = filtra_data(df, perg_data)
+        df = agrupa_visitas(df, perg_equipes)
 
         try:
 
