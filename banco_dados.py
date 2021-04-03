@@ -20,12 +20,12 @@ def desconectar(conn):
         conn.close()
 
 
-def listar(data):
+def listar():
     """
     Função para listar as informações dos pacientes.
     """
 
-    sql = f'select * from visitas WHERE data_visita = STR_TO_DATE("{data}", "%Y-%m-%d")'
+    sql = f'select * from visitas'
 
     conn = conectar()
     cursor = conn.cursor()
