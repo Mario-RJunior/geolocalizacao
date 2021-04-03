@@ -10,9 +10,9 @@ import numpy as np
 # from math import ceil
 
 
-def acessa_bd(data):
+def acessa_bd():
     colunas = ['id', 'Nome', 'Rua', 'Numero_rua', 'Bairro', 'Cidade', 'Estado', 'Data']
-    lista_dados = list(zip(colunas, listar(data)))
+    lista_dados = list(zip(colunas, listar()))
     dados = {}
     for c in lista_dados:
         dados[c[0]] = c[1]
