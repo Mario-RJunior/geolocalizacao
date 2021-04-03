@@ -15,7 +15,7 @@ if __name__ == '__main__':
 
         perg_data = str(input('Insira a data da visita (dd/mm/aaaa): '))
 
-        bd = acessa_bd(perg_data)
+        bd = acessa_bd()
         df = gera_dataframe(bd)
         df = agrupa_visitas(perg_equipes, df)
 
