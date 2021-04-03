@@ -37,6 +37,13 @@ def converte_endereco(endereco):
     return loc.latitude, loc.longitude
 
 
+def filtra_data(dataframe, data):
+    dataframe['Data'] = pd.to_datetime(dataframe['Data'])
+    df_filtrado = dataframe.query(f'Data == "{data}"')
+
+    return df_filtrado
+
+
 def agrupa_visitas(num_equipes, dataframe):
     try:
 
