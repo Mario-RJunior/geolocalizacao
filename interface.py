@@ -13,5 +13,12 @@ if __name__ == '__main__':
     bd = acessa_bd(data)
     df = gera_dataframe(bd)
     df = agrupa_visitas(equipes, df)
-    m = map_plot(df, origem)
-    folium_static(m)
+
+    try:
+        m = map_plot(df, origem)
+
+    except KeyError:
+        st.write('Não há visitas previstas nesta data')
+
+    else:
+        folium_static(m)
