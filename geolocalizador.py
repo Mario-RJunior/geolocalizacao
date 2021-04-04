@@ -37,7 +37,7 @@ def converte_endereco(endereco):
     return loc.latitude, loc.longitude
 
 
-def agrupa_visitas(num_equipes, dataframe):
+def agrupa_visitas(dataframe, num_equipes):
     try:
 
         serie = dataframe['endereco_completo'].apply(converte_endereco)
