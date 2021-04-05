@@ -11,18 +11,22 @@ data = st.sidebar.date_input('Data')
 equipes = st.sidebar.selectbox('Número de equipes', [1, 2, 3, 4, 5, 6, 7])
 
 if __name__ == '__main__':
-    bd = acessa_bd(data)
-    df = gera_dataframe(bd)
-    df = agrupa_visitas(df, equipes)
-
     try:
-        m = map_plot(df, origem)
-
-    except KeyError:
-        st.write('Não há visitas previstas nesta data.')
-
+        bd = acessa_bd(data)
     except AttributeError:
-        st.write('Selecione um endereço válido.')
-
+        st.write('Conexão com banco de dados não realizada.')
     else:
-        folium_static(m)
+        df = gera_dataframe(bd)
+        df = agrupa_visitas(df, equipes)
+
+        try:
+            m = map_plot(df, origem)
+
+        except KeyError:
+            st.write('Não há visitas previstas nesta data.')
+
+        except AttributeError:
+            st.write('Selecione um endereço válido.')
+
+        else:
+            folium_static(m)
