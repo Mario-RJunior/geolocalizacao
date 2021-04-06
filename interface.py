@@ -30,3 +30,4 @@ if __name__ == '__main__':
 
         else:
             folium_static(m)
+            calcula_rota(df, origem)
