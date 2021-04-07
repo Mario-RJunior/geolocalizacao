@@ -32,4 +32,5 @@ if __name__ == '__main__':
 
         else:
             folium_static(m)
-            calcula_distancias(df, origem)
+            lista_rotas = calcula_distancias(df, origem)
+            retorna_rotas(lista_rotas)
