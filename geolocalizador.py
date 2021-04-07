@@ -108,7 +108,7 @@ def map_plot(dataframe, origem):
         print('Erro ao gerar o mapa. Tente novamente.')
 
 
-def calcula_rota(dataframe, origem):
+def calcula_distancias(dataframe, origem):
     grupos = np.sort(dataframe['equipes'].unique())
     lista_grupos = []
 
