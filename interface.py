@@ -13,8 +13,10 @@ equipes = st.sidebar.selectbox('Número de equipes', [1, 2, 3, 4, 5, 6, 7])
 if __name__ == '__main__':
     try:
         bd = acessa_bd(data)
+
     except AttributeError:
         st.write('Conexão com banco de dados não realizada.')
+
     else:
         df = gera_dataframe(bd)
         df = agrupa_visitas(df, equipes)
