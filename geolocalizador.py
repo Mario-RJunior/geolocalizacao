@@ -2,7 +2,6 @@ import pandas as pd
 from geopy.geocoders import Nominatim
 import geopy.distance
 from banco_dados import listar
-from pprint import pprint
 from sklearn.cluster import SpectralClustering
 import folium
 import numpy as np
