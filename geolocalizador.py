@@ -127,3 +127,7 @@ def calcula_distancias(dataframe, origem):
         lista_grupos.append(dic)
 
     return lista_grupos
+
+
+def retorna_rotas(rotas):
+    pass
