@@ -1,6 +1,7 @@
 import streamlit as st
 from geolocalizador import *
 from streamlit_folium import folium_static
+import pandas as pd
 
 st.title('Mapster')
 st.sidebar.title('Menu')
@@ -33,4 +34,7 @@ if __name__ == '__main__':
         else:
             folium_static(m)
             lista_rotas = calcula_distancias(df, origem)
-            retorna_rotas(lista_rotas)
+            grupos_end = retorna_rotas(lista_rotas)
+
+            for c, v in grupos_end.items():
+                st.write(c, v)
