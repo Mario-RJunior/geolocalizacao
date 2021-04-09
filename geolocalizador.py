@@ -130,4 +130,18 @@ def calcula_distancias(dataframe, origem):
 
 
 def retorna_rotas(rotas):
-    pass
+    dic_rotas_ordenadas = {}
+    rotas_temp = []
+    cont = 0
+
+    for r in rotas:
+        cont += 1
+        rota_ordenada = sorted(r.items(), key=lambda x: x[1])
+
+        for ro in rota_ordenada:
+            rotas_temp.append(ro[0])
+
+        dic_rotas_ordenadas[f'Equipe {cont}'] = rotas_temp.copy()
+        rotas_temp.clear()
+
+    return dic_rotas_ordenadas
