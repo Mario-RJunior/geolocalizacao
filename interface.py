@@ -1,9 +1,8 @@
 import streamlit as st
 from geolocalizador import *
 from streamlit_folium import folium_static
-import pandas as pd
 
-st.title('Mapster')
+st.title('Mapszer App')
 st.sidebar.title('Menu')
 
 origem = st.sidebar.selectbox('Endereço de origem', ['Selecione um endereço',
