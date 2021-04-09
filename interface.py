@@ -35,6 +35,4 @@ if __name__ == '__main__':
             folium_static(m)
             lista_rotas = calcula_distancias(df, origem)
             grupos_end = retorna_rotas(lista_rotas)
-
-            for c, v in grupos_end.items():
-                st.write(c, v)
+            st.write(grupos_end)
