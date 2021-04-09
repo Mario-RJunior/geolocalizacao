@@ -132,6 +132,7 @@ def calcula_distancias(dataframe, origem):
 def retorna_rotas(rotas):
     dic_rotas_ordenadas = {}
     rotas_temp = []
+    nome_col = []
     cont = 0
 
     for r in rotas:
@@ -144,4 +145,12 @@ def retorna_rotas(rotas):
         dic_rotas_ordenadas[f'Equipe {cont}'] = rotas_temp.copy()
         rotas_temp.clear()
 
-    return dic_rotas_ordenadas
+    df = pd.DataFrame.from_dict(dic_rotas_ordenadas, orient='index')
+    df.fillna('-', inplace=True)
+
+    for i in range(len(df.columns)):
+        nome_col.append('')
+
+    df.columns = nome_col
+
+    return df
