@@ -6,6 +6,8 @@ from sklearn.cluster import SpectralClustering
 import folium
 import numpy as np
 
+# TODO: Implementar uma função para calcular distância para maior e menor rota.
+
 
 def acessa_bd(data):
     colunas = ['id', 'Nome', 'Rua', 'Numero_rua', 'Bairro', 'Cidade', 'Estado', 'Data']
