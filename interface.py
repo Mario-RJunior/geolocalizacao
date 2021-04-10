@@ -36,7 +36,13 @@ if __name__ == '__main__':
             grupos_end = retorna_rotas(lista_rotas)
 
             for r, e in grupos_end.items():
+                texto = ''
                 st.write(r)
 
-                for i in e:
-                    st.markdown(f'- {i}')
+                for i in range(len(e) - 1):
+                    texto += f'{e[i]} '
+
+                    if i != len(e) - 2:
+                        texto += '-> '
+
+                st.markdown(f'- {texto.strip()}.')
