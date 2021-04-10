@@ -97,11 +97,13 @@ def map_plot(dataframe, origem):
                       icon=folium.Icon(color='darkgreen', icon='medkit', prefix="fa")
                       ).add_to(m)
 
-        return m
-
     except TypeError:
 
         print('Erro ao gerar o mapa. Tente novamente.')
+
+    else:
+
+        return m
 
 
 def calcula_distancias(dataframe, origem):
