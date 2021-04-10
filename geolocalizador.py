@@ -5,8 +5,6 @@ from banco_dados import listar
 from sklearn.cluster import SpectralClustering
 import folium
 import numpy as np
-# import webbrowser
-# from math import ceil
 
 
 def acessa_bd(data):
@@ -54,7 +52,6 @@ def agrupa_visitas(dataframe, num_equipes):
 
         else:
 
-            # qtd_visitas_cluster = ceil(dataframe.shape[0] / num_equipes)
             x = dataframe.loc[:, ['latitude', 'longitude']].values
 
             clustering = SpectralClustering(n_clusters=num_equipes,
@@ -98,8 +95,6 @@ def map_plot(dataframe, origem):
                       icon=folium.Icon(color='darkgreen', icon='medkit', prefix="fa")
                       ).add_to(m)
 
-        # m.save('map.html')
-        # webbrowser.open('map.html', new=2)
         return m
 
     except TypeError:
@@ -132,7 +127,6 @@ def calcula_distancias(dataframe, origem):
 def retorna_rotas(rotas):
     dic_rotas_ordenadas = {}
     rotas_temp = []
-    nome_col = []
     cont = 0
 
     for r in rotas:
@@ -144,13 +138,5 @@ def retorna_rotas(rotas):
 
         dic_rotas_ordenadas[f'Equipe {cont}'] = rotas_temp.copy()
         rotas_temp.clear()
-
-    #df = pd.DataFrame.from_dict(dic_rotas_ordenadas, orient='index')
-    #df.fillna('-', inplace=True)
-
-    #for i in range(len(df.columns)):
-    #    nome_col.append('')
-
-    #df.columns = nome_col
 
     return dic_rotas_ordenadas
