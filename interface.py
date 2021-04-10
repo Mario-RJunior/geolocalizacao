@@ -39,10 +39,10 @@ if __name__ == '__main__':
                 texto = ''
                 st.markdown(f'### {r}')
 
-                for i in range(len(e) - 1):
+                for i in range(len(e)):
                     texto += f'{e[i]} '
 
-                    if i != len(e) - 2:
+                    if i != len(e) - 1:
                         texto += '-> '
 
                 st.markdown(f'- {texto.strip()}.')
