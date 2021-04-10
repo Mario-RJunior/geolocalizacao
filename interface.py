@@ -2,7 +2,7 @@ import streamlit as st
 from geolocalizador import *
 from streamlit_folium import folium_static
 
-st.title('Mapszer App')
+st.title('Mapzer App')
 st.sidebar.title('Menu')
 
 origem = st.sidebar.selectbox('Endereço de origem', ['Selecione um endereço',
