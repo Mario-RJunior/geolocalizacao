@@ -37,7 +37,7 @@ if __name__ == '__main__':
 
             for r, e in grupos_end.items():
                 texto = ''
-                st.write(r)
+                st.markdown(f'### {r}')
 
                 for i in range(len(e) - 1):
                     texto += f'{e[i]} '
