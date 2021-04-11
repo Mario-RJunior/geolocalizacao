@@ -90,11 +90,13 @@ def map_plot(dataframe, origem):
         m = folium.Map(location=[-20.2999473, -40.3221028], zoom_start=12)
         for loc in coordenadas:
             folium.Marker(location=(loc[0], loc[1]),
-                          icon=folium.Icon(color=paleta_cores[loc[2]], icon='user', prefix="fa")
+                          icon=folium.Icon(color=paleta_cores[loc[2]], icon='user', prefix="fa"),
+                          popup=f'Equipe {loc[2] + 1}'
                           ).add_to(m)
 
         folium.Marker(location=(coord_origem[0], coord_origem[1]),
-                      icon=folium.Icon(color='darkgreen', icon='medkit', prefix="fa")
+                      icon=folium.Icon(color='darkgreen', icon='medkit', prefix="fa"),
+                      popup='Origem'
                       ).add_to(m)
 
     except TypeError:
