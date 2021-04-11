@@ -114,13 +114,13 @@ def calcula_distancias(dataframe, origem):
 
     for g in grupos:
 
-        incio = origem
+        inicio = origem
         df = dataframe.query(f'equipes == {g}')
         enderecos = df['endereco_completo'].to_list()
         dic = {}
 
         for end in enderecos:
-            coord_inicio = converte_endereco(incio)
+            coord_inicio = converte_endereco(inicio)
             coord = converte_endereco(end)
             distancia = geopy.distance.distance(coord_inicio, coord).km
 
