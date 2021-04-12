@@ -65,11 +65,13 @@ def agrupa_visitas(dataframe, num_equipes):
             previsoes = clustering.fit_predict(x)
             dataframe['equipes'] = previsoes
 
-        return dataframe
-
     except TypeError:
 
         print('Número de grupos maior do que o número de visitas. Tente novamente.')
+
+    else:
+
+        return dataframe
 
 
 def map_plot(dataframe, origem):
