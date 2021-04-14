@@ -13,6 +13,7 @@ def acessa_bd(data):
     colunas = ['id', 'Nome', 'Rua', 'Numero_rua', 'Bairro', 'Cidade', 'Estado', 'Data']
     lista_dados = list(zip(colunas, listar(data)))
     dados = {}
+
     for c in lista_dados:
         dados[c[0]] = c[1]
 
@@ -90,6 +91,7 @@ def map_plot(dataframe, origem):
         coordenadas = list(zip(lat, lon, equipes))
 
         m = folium.Map(location=[-20.2999473, -40.3221028], zoom_start=12)
+
         for loc in coordenadas:
             folium.Marker(location=(loc[0], loc[1]),
                           icon=folium.Icon(color=paleta_cores[loc[2]], icon='user', prefix="fa"),
