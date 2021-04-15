@@ -6,6 +6,7 @@ from sklearn.cluster import SpectralClustering
 import folium
 import numpy as np
 
+
 # TODO: Implementar uma função para calcular distância para maior e menor rota.
 
 
@@ -150,3 +151,35 @@ def retorna_rotas(rotas):
         rotas_temp.clear()
 
     return dic_rotas_ordenadas
+
+
+def distancias_max_min(dataframe, origem):
+    grupos = np.sort(dataframe['equipes'].unique())
+    lista_distancias = []
+
+    for g in grupos:
+
+        inicio = origem
+        df = dataframe.query(f'equipes == {g}')
+        enderecos = df['endereco_completo'].to_list()
+        dic = {}
+        dic2 = {}
+
+        while len(enderecos) > 0:
+
+            for end in enderecos:
+                coord_inicio = converte_endereco(inicio)
+                coord = converte_endereco(end)
+                distancia = geopy.distance.distance(coord_inicio, coord).km
+
+                dic[end] = distancia
+
+            mais_perto = min(dic, key=dic.get)
+            dic2[mais_perto] = dic[mais_perto]
+            inicio = mais_perto
+            dic.clear()
+            enderecos.remove(mais_perto)
+
+        lista_distancias.append(dic2)
+
+    return lista_distancias
