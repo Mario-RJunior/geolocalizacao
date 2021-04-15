@@ -1,6 +1,7 @@
 import streamlit as st
 from geolocalizador import *
 from streamlit_folium import folium_static
+from pprint import pprint
 
 st.title('Mapzer App')
 st.sidebar.title('Menu')
@@ -46,3 +47,5 @@ if __name__ == '__main__':
                         texto += '-> '
 
                 st.markdown(f'- {texto.strip()}.')
+
+            pprint(distancias_max_min(df, origem))
