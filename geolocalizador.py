@@ -164,6 +164,7 @@ def distancias_max_min(dataframe, origem):
         enderecos = df['endereco_completo'].to_list()
         dic = {}
         dic2 = {}
+        min_dist = 0
 
         while len(enderecos) > 0:
 
@@ -177,6 +178,8 @@ def distancias_max_min(dataframe, origem):
             mais_perto = min(dic, key=dic.get)
             dic2[mais_perto] = dic[mais_perto]
             inicio = mais_perto
+
+            min_dist += dic[mais_perto]
             dic.clear()
             enderecos.remove(mais_perto)
 
