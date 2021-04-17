@@ -1,4 +1,4 @@
-import MySQLdb
+import psycopg2
 
 
 def conectar():
@@ -6,9 +6,15 @@ def conectar():
     Função para conectar ao servidor.
     """
     try:
-        conn = MySQLdb.connect(db='pacientes', host='localhost', user='root', password='')
+        conn = psycopg2.connect(
+            database='pacientes',
+            host='localhost',
+            user='teste_db',
+            password='postgres')
+
         return conn
-    except MySQLdb.Error as e:
+
+    except psycopg2.Error as e:
         print(f'Erro na conexão ao MySQL Server: {e}.')
 
 
@@ -25,7 +31,7 @@ def listar(data):
     Função para listar as informações dos pacientes.
     """
 
-    sql = f'select * from visitas WHERE data_visita = STR_TO_DATE("{data}", "%Y-%m-%d")'
+    sql = f"SELECT * FROM visitas WHERE data_visita = '{data}';"
 
     conn = conectar()
     cursor = conn.cursor()
