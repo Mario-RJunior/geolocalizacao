@@ -32,9 +32,12 @@ if __name__ == '__main__':
             st.write('Selecione um endereço válido.')
 
         else:
+            st.markdown(f'## Mapa')
             folium_static(m)
             lista_rotas = calcula_distancias(df, origem)
             grupos_end = retorna_rotas(lista_rotas)
+
+            st.markdown(f'## Trajetórias')
 
             for r, e in grupos_end.items():
                 texto = ''
