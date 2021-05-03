@@ -21,6 +21,7 @@ def conectar():
 def desconectar(conn):
     """
     Função para desconectar do servidor.
+    :param conn: Conexão que se deseja encerrar.
     """
     if conn:
         conn.close()
@@ -29,6 +30,8 @@ def desconectar(conn):
 def listar(data):
     """
     Função para listar as informações dos pacientes.
+    :param data: Data em que se deseja filtrar os registros do banco de dados.
+    :return: Tupla com as listas de todas as colunas da tabela do banco de dados.
     """
 
     sql = f"SELECT * FROM visitas WHERE data_visita = '{data}';"
