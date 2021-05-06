@@ -27,6 +27,11 @@ def acessa_bd(data):
 
 
 def gera_dataframe(dado):
+    """
+    Função que gera um dataframe a partir das informações do banco de dados.
+    :param dado: Dicionário com os dados do banco de dados passado pela função acessa_bd.
+    :return: Dataframe completo com informações do banco de dados.
+    """
     dataframe = pd.DataFrame(dado)
     dataframe['endereco_completo'] = \
         dataframe['Rua'].astype(str) + ', ' + dataframe['Numero_rua'].astype(str) + ', ' + \
