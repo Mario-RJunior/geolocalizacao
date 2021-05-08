@@ -54,6 +54,12 @@ def converte_endereco(endereco):
 
 
 def agrupa_visitas(dataframe, num_equipes):
+    """
+    Função que faz o agrupamento dos pacientes a partir da sua localização.
+    :param dataframe: Dataframe que possue endereço dos clientes.
+    :para num_equipes: Número de grupos em que se deseja agrupar os pacientes.
+    :return: Dataframe com colunas extras para latitude, longitute e grupo a qual o paciente foi associado. 
+    """
     try:
 
         serie = dataframe['endereco_completo'].apply(converte_endereco)
