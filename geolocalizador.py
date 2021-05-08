@@ -41,6 +41,11 @@ def gera_dataframe(dado):
 
 
 def converte_endereco(endereco):
+    """
+    Função que recebe um endereço e o converte para coordenadas geográficas.
+    :param endereco: Endereço a que se deseja calcular suas coordenadas geográficas.
+    :return: Coordenada geográfica do endereço.
+    """
     geolocator = Nominatim(user_agent="my_user_agent", timeout=20)
     pais = "BR"
     loc = geolocator.geocode(endereco + ',' + pais)
