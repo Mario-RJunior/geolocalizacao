@@ -98,6 +98,12 @@ def agrupa_visitas(dataframe, num_equipes):
 
 
 def map_plot(dataframe, origem):
+    """
+    Função para plotar o mapa com as localizações dos endereços.
+    :param dataframe: Dataframe que possui as coordenadas geográficas dos endereços.
+    :param origem: Endereço de origem das visitas.
+    :return: Retorna o respectivo mapa.
+    """
     try:
 
         paleta_cores = ('blue', 'orange', 'darkred', 'pink', 'darkpurple', 'cadetblue',
