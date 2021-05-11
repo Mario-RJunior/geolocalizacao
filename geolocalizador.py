@@ -141,6 +141,12 @@ def map_plot(dataframe, origem):
 
 
 def calcula_distancias(dataframe, origem):
+    """
+    Função para calcular as distâncias entre os endereços e o ponto de origem.
+    :param dataframe: Dataframe que contém os dados necessários.
+    :param origem: Endereço de origem das visitas.
+    :return: Lista com dicionários contendo endereço e distância calculada a partir da do ponto de origem, divididas pelos grupos.
+    """
     grupos = np.sort(dataframe['equipes'].unique())
     lista_grupos = []
 
