@@ -169,6 +169,11 @@ def calcula_distancias(dataframe, origem):
 
 
 def retorna_rotas(rotas):
+    """
+    Função que recebe um lista com as rotas e ordena os endereços de forma crescente das distâncias.
+    :param rotas: Lista com os endereços e suas distâncias.
+    :return: Lista com os endereços ordenados pela distância.
+    """
     dic_rotas_ordenadas = {}
     rotas_temp = []
     cont = 0
