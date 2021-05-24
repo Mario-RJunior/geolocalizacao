@@ -192,6 +192,12 @@ def retorna_rotas(rotas):
 
 
 def distancias_max_min(dataframe, origem):
+    """
+    Função que retorna os endereços considerando suas distâncias máximas e mínimas.
+    :param dataframe: Dataframe atualizado.
+    :param origem: Ponto de partida para as visitas.
+    :return: Lista com os endereços com suas respectivas distâncas.
+    """
     grupos = np.sort(dataframe['equipes'].unique())
     lista_distancias = []
 
