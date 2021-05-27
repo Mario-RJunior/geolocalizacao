@@ -191,23 +191,25 @@ def retorna_rotas(rotas):
     return dic_rotas_ordenadas
 
 
-def distancias_max_min(dataframe, origem):
+def distancias_min_max(dataframe, origem, maximo=True):
     """
-    Função que retorna os endereços considerando suas distâncias máximas e mínimas.
+    Função que retorna distâncias máximas e mínimas de cada rota.
     :param dataframe: Dataframe atualizado.
     :param origem: Ponto de partida para as visitas.
+    :param maximo: Indica se queremos retornar as distâncias máximas ou mínimas. Se True = máxima, se False = mínima.
     :return: Lista com os endereços com suas respectivas distâncas.
     """
     grupos = np.sort(dataframe['equipes'].unique())
     lista_distancias = []
+    dist_min_max = []
 
     for g in grupos:
 
         inicio = origem
         df = dataframe.query(f'equipes == {g}')
         enderecos = df['endereco_completo'].to_list()
+        dic_temp = {}
         dic = {}
-        dic2 = {}
         min_dist = 0
 
         while len(enderecos) > 0:
@@ -217,16 +219,27 @@ def distancias_max_min(dataframe, origem):
                 coord = converte_endereco(end)
                 distancia = geopy.distance.distance(coord_inicio, coord).km
 
-                dic[end] = distancia
+                dic_temp[end] = distancia
 
-            mais_perto = min(dic, key=dic.get)
-            dic2[mais_perto] = dic[mais_perto]
+            if maximo:
+                mais_perto = max(dic_temp, key=dic_temp.get)
+
+            else:
+                mais_perto = min(dic_temp, key=dic_temp.get)
+
+            dic[mais_perto] = dic_temp[mais_perto]
             inicio = mais_perto
 
-            min_dist += dic[mais_perto]
-            dic.clear()
+            min_dist += dic_temp[mais_perto]
+            dic_temp.clear()
             enderecos.remove(mais_perto)
 
-        lista_distancias.append(dic2)
+        lista_distancias.append(dic)
 
-    return lista_distancias
+    for d in lista_distancias:
+        soma = 0
+        for _, v in d.items():
+            soma += v
+        dist_min_max.append(soma)
+
+    return dist_min_max
