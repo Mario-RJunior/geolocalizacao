@@ -35,9 +35,12 @@ if __name__ == '__main__':
             folium_static(m)
             lista_rotas = calcula_distancias(df, origem)
             grupos_end = retorna_rotas(lista_rotas)
+            dist_max = distancias_min_max(df, origem)
+            dist_min = distancias_min_max(df, origem, maximo=False)
 
             st.markdown(f'## Trajetórias')
 
+            cont = 0
             for r, e in grupos_end.items():
                 texto = ''
                 st.markdown(f'### {r}')
@@ -49,3 +52,8 @@ if __name__ == '__main__':
                         texto += '-> '
 
                 st.markdown(f'- {texto.strip()}.')
+
+                st.markdown(f'Distânca máxima: {dist_max[cont]}')
+                st.markdown(f'Distânca mínima: {dist_min[cont]}')
+
+                cont += 1
