@@ -243,3 +243,9 @@ def distancias_min_max(dataframe, origem, maximo=True):
         dist_min_max.append(soma)
 
     return dist_min_max
+
+
+def gera_log(erro):
+    with open('log_erro.txt', 'a') as f:
+        f.write(str(erro))
+        f.write('\n')
