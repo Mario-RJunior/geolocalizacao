@@ -53,7 +53,7 @@ if __name__ == '__main__':
 
                 st.markdown(f'- {texto.strip()}.')
 
-                st.markdown(f'Distânca máxima: {dist_max[cont]}')
-                st.markdown(f'Distânca mínima: {dist_min[cont]}')
+                st.markdown(f'Distânca máxima: {round(dist_max[cont], 2) } Km')
+                st.markdown(f'Distânca mínima: {round(dist_min[cont], 2) } Km')
 
                 cont += 1
