@@ -5,6 +5,7 @@ from banco_dados import listar
 from sklearn.cluster import SpectralClustering
 import folium
 import numpy as np
+from datetime import datetime
 
 
 # TODO: Implementar uma função para calcular distância para maior e menor rota.
@@ -247,5 +248,8 @@ def distancias_min_max(dataframe, origem, maximo=True):
 
 def gera_log(erro):
     with open('log_erro.txt', 'a') as f:
+        data = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+
+        f.write(data + ' - ')
         f.write(str(erro))
         f.write('\n')
