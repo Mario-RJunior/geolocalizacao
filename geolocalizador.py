@@ -247,6 +247,10 @@ def distancias_min_max(dataframe, origem, maximo=True):
 
 
 def gera_log(erro):
+    """
+    Função quer cria / atualiza um arquivo de texto com os erros de execução.
+    :param erro: Mensagem de erro gerada.
+    """
     with open('log_erro.txt', 'a') as f:
         data = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
 
