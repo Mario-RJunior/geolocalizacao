@@ -8,9 +8,6 @@ import numpy as np
 from datetime import datetime
 
 
-# TODO: Implementar uma função para calcular distância para maior e menor rota.
-
-
 def acessa_bd(data):
     """
     Função que chama a função listar e filtra as informações do banco de dados pela data recebida.
