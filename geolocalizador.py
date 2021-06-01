@@ -73,6 +73,14 @@ def agrupa_visitas(dataframe, num_equipes):
 
             dataframe['equipes'] = 0
 
+        elif len(dataframe) == 2:
+
+            dataframe['equipes'] = 0
+
+        elif len(dataframe) == 3:
+
+            dataframe['equipes'] = 0
+
         else:
 
             x = dataframe.loc[:, ['latitude', 'longitude']].values
