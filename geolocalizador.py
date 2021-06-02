@@ -69,15 +69,7 @@ def agrupa_visitas(dataframe, num_equipes):
 
             pass
 
-        elif len(dataframe) == 1:
-
-            dataframe['equipes'] = 0
-
-        elif len(dataframe) == 2:
-
-            dataframe['equipes'] = 0
-
-        elif len(dataframe) == 3:
+        elif len(dataframe) in [1, 2, 3]:
 
             dataframe['equipes'] = 0
 
