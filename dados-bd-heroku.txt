@@ -1,0 +1,6 @@
+Host: ec2-54-162-119-125.compute-1.amazonaws.com
+Database: d1bgerpglg9631
+User: fnimucuuhyayve
+Port: 5432
+Password: 02cffae79aa0f50e8827d9f85b348b8bb1a01a9ff719974e6961ea57c33abe50
+URI: postgres://fnimucuuhyayve:02cffae79aa0f50e8827d9f85b348b8bb1a01a9ff719974e6961ea57c33abe50@ec2-54-162-119-125.compute-1.amazonaws.com:5432/d1bgerpglg9631
