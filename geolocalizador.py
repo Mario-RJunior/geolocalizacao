@@ -6,6 +6,7 @@ from sklearn.cluster import SpectralClustering
 import folium
 import numpy as np
 from datetime import datetime
+import webbrowser
 
 
 class Mapzer:
@@ -98,7 +99,7 @@ class Mapzer:
 
             return dataframe
 
-    def map_plot(dataframe, origem):
+    def map_plot(self, dataframe):
         """
         Função para plotar o mapa com as localizações dos endereços.
         :param dataframe: Dataframe que possui as coordenadas geográficas dos endereços.
@@ -106,7 +107,6 @@ class Mapzer:
         :return: Retorna o respectivo mapa.
         """
 
-        """
         try:
 
             paleta_cores = ('blue', 'orange', 'darkred', 'pink', 'darkpurple', 'cadetblue',
@@ -117,7 +117,7 @@ class Mapzer:
             lat = dataframe['latitude'].to_list()
             lon = dataframe['longitude'].to_list()
             equipes = dataframe['equipes'].to_list()
-            coord_origem = converte_endereco(origem)
+            coord_origem = self.converte_endereco(self.origem)
 
             coordenadas = list(zip(lat, lon, equipes))
 
@@ -140,9 +140,9 @@ class Mapzer:
 
         else:
 
+            m.save('map.html')
+            webbrowser.open('map.html', new=2)
             return m
-        
-        """
 
     def calcula_distancias(dataframe, origem):
         """
@@ -276,7 +276,5 @@ if __name__ == '__main__':
                3)
     m.acessa_bd()
     df = m.gera_dataframe()
-    print(df)
-    print('-=' * 100)
     df = m.agrupa_visitas(df)
-    print(df)
+    m.map_plot(df)
