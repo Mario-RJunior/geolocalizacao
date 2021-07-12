@@ -42,7 +42,7 @@ class Mapzer:
 
         return dataframe
 
-    def converte_endereco(endereco):
+    def converte_endereco(self, endereco):
         """
         Função que recebe um endereço e o converte para coordenadas geográficas.
         :param endereco: Endereço a que se deseja calcular suas coordenadas geográficas.
@@ -54,17 +54,17 @@ class Mapzer:
 
         return loc.latitude, loc.longitude
 
-    def agrupa_visitas(dataframe, num_equipes):
+    def agrupa_visitas(self, dataframe):
         """
         Função que faz o agrupamento dos pacientes a partir da sua localização.
         :param dataframe: Dataframe que possue endereço dos clientes.
         :param num_equipes: Número de grupos em que se deseja agrupar os pacientes.
         :return: Dataframe com colunas extras para latitude, longitute e grupo a qual o paciente foi associado.
         """
-        """
+
         try:
 
-            serie = dataframe['endereco_completo'].apply(converte_endereco)
+            serie = dataframe['endereco_completo'].apply(self.converte_endereco)
 
             dataframe['latitude'] = serie.apply(lambda lat: lat[0])
             dataframe['longitude'] = serie.apply(lambda lon: lon[1])
@@ -81,7 +81,7 @@ class Mapzer:
 
                 x = dataframe.loc[:, ['latitude', 'longitude']].values
 
-                clustering = SpectralClustering(n_clusters=num_equipes,
+                clustering = SpectralClustering(n_clusters=self.quantidade,
                                                 assign_labels="discretize",
                                                 random_state=0,
                                                 affinity='nearest_neighbors',
@@ -97,8 +97,6 @@ class Mapzer:
         else:
 
             return dataframe
-            
-        """
 
     def map_plot(dataframe, origem):
         """
@@ -276,6 +274,9 @@ if __name__ == '__main__':
     m = Mapzer('Av. Cezar Hilal, 700, Vitória - ES',
                '2021-03-20',
                3)
-    print(m.acessa_bd())
-    print('-' * 100)
-    print(m.gera_dataframe())
+    m.acessa_bd()
+    df = m.gera_dataframe()
+    print(df)
+    print('-=' * 100)
+    df = m.agrupa_visitas(df)
+    print(df)
