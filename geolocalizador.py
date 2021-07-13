@@ -172,14 +172,13 @@ class Mapzer:
 
         return lista_grupos
 
-    def retorna_rotas(rotas):
+    def retorna_rotas(self, rotas):
         """
         Função que recebe um lista com as rotas e ordena os endereços de forma crescente das distâncias.
         :param rotas: Lista com os endereços e suas distâncias.
         :return: Lista com os endereços ordenados pela distância.
         """
 
-        """
         dic_rotas_ordenadas = {}
         rotas_temp = []
         cont = 0
@@ -195,7 +194,6 @@ class Mapzer:
             rotas_temp.clear()
 
         return dic_rotas_ordenadas
-        """
 
     def distancias_min_max(dataframe, origem, maximo=True):
         """
@@ -275,4 +273,5 @@ if __name__ == '__main__':
     df = m.gera_dataframe()
     df = m.agrupa_visitas(df)
     m.map_plot(df)
-    print(m.calcula_distancias(df))
+    distancias = m.calcula_distancias(df)
+    print(m.retorna_rotas(distancias))
