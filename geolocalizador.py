@@ -195,7 +195,7 @@ class Mapzer:
 
         return dic_rotas_ordenadas
 
-    def distancias_min_max(dataframe, origem, maximo=True):
+    def distancias_min_max(self, dataframe, maximo=True):
         """
         Função que retorna distâncias máximas e mínimas de cada rota.
         :param dataframe: Dataframe atualizado.
@@ -204,14 +204,13 @@ class Mapzer:
         :return: Lista com os endereços com suas respectivas distâncas.
         """
 
-        """
         grupos = np.sort(dataframe['equipes'].unique())
         lista_distancias = []
         dist_min_max = []
 
         for g in grupos:
 
-            inicio = origem
+            inicio = self.origem
             df = dataframe.query(f'equipes == {g}')
             enderecos = df['endereco_completo'].to_list()
             dic_temp = {}
@@ -221,8 +220,8 @@ class Mapzer:
             while len(enderecos) > 0:
 
                 for end in enderecos:
-                    coord_inicio = converte_endereco(inicio)
-                    coord = converte_endereco(end)
+                    coord_inicio = self.converte_endereco(inicio)
+                    coord = self.converte_endereco(end)
                     distancia = geopy.distance.distance(coord_inicio, coord).km
 
                     dic_temp[end] = distancia
@@ -249,10 +248,8 @@ class Mapzer:
             dist_min_max.append(soma)
 
         return dist_min_max
-        
-        """
 
-    def gera_log(erro):
+    def gera_log(self, erro):
         """
         Função quer cria / atualiza um arquivo de texto com os erros de execução.
         :param erro: Mensagem de erro gerada.
@@ -275,3 +272,4 @@ if __name__ == '__main__':
     m.map_plot(df)
     distancias = m.calcula_distancias(df)
     print(m.retorna_rotas(distancias))
+    print(m.distancias_min_max(df))
