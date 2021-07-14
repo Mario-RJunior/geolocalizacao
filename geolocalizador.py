@@ -6,7 +6,6 @@ from sklearn.cluster import SpectralClustering
 import folium
 import numpy as np
 from datetime import datetime
-import webbrowser
 
 
 class Mapzer(Bd):
@@ -139,9 +138,6 @@ class Mapzer(Bd):
             print('Erro ao gerar o mapa. Tente novamente.')
 
         else:
-
-            m.save('map.html')
-            webbrowser.open('map.html', new=2)
             return m
 
     def calcula_distancias(self, dataframe):
