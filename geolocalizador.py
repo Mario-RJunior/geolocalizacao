@@ -1,7 +1,7 @@
 import pandas as pd
 from geopy.geocoders import Nominatim
 import geopy.distance
-from banco_dados import listar
+from banco_dados import Bd
 from sklearn.cluster import SpectralClustering
 import folium
 import numpy as np
@@ -9,7 +9,7 @@ from datetime import datetime
 import webbrowser
 
 
-class Mapzer:
+class Mapzer(Bd):
 
     def __init__(self, origem, data, quantidade):
         self.origem = origem
@@ -23,7 +23,7 @@ class Mapzer:
         :return: Retorna um dicionário com os dados do banco de dados.
         """
         colunas = ['id', 'Nome', 'Rua', 'Numero_rua', 'Bairro', 'Cidade', 'Estado', 'Data']
-        lista_dados = list(zip(colunas, listar(self.data)))
+        lista_dados = list(zip(colunas, Bd.listar(self, data=self.data)))
         # dados = {}
 
         for c in lista_dados:
