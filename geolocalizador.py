@@ -260,16 +260,3 @@ class Mapzer(Bd):
             f.write(data + ' - ')
             f.write(str(erro))
             f.write('\n')
-
-
-if __name__ == '__main__':
-    m = Mapzer('Av. Cezar Hilal, 700, Vitória - ES',
-               '2021-03-20',
-               3)
-    m.acessa_bd()
-    df = m.gera_dataframe()
-    df = m.agrupa_visitas(df)
-    m.map_plot(df)
-    distancias = m.calcula_distancias(df)
-    print(m.retorna_rotas(distancias))
-    print(m.distancias_min_max(df))
