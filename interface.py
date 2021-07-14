@@ -1,5 +1,5 @@
 import streamlit as st
-from geolocalizador import *
+from geolocalizador import Mapzer
 from streamlit_folium import folium_static
 
 st.title('Mapzer App')
@@ -11,18 +11,19 @@ data = st.sidebar.date_input('Data')
 equipes = st.sidebar.selectbox('Número de equipes', [1, 2, 3, 4, 5, 6, 7])
 
 if __name__ == '__main__':
+    m = Mapzer(origem, data, equipes)
     try:
-        bd = acessa_bd(data)
+        bd = m.acessa_bd()
 
     except AttributeError:
         st.write('Conexão com banco de dados não realizada.')
 
     else:
-        df = gera_dataframe(bd)
-        df = agrupa_visitas(df, equipes)
+        df = m.gera_dataframe()
+        df = m.agrupa_visitas(df)
 
         try:
-            m = map_plot(df, origem)
+            mapa = m.map_plot(df)
 
         except KeyError:
             st.write('Não há visitas previstas nesta data.')
@@ -32,11 +33,11 @@ if __name__ == '__main__':
 
         else:
             st.markdown(f'## Mapa')
-            folium_static(m)
-            lista_rotas = calcula_distancias(df, origem)
-            grupos_end = retorna_rotas(lista_rotas)
-            dist_max = distancias_min_max(df, origem)
-            dist_min = distancias_min_max(df, origem, maximo=False)
+            folium_static(mapa)
+            lista_rotas = m.calcula_distancias(df)
+            grupos_end = m.retorna_rotas(lista_rotas)
+            dist_max = m.distancias_min_max(df)
+            dist_min = m.distancias_min_max(df, maximo=False)
 
             st.markdown(f'## Trajetórias')
 
