@@ -23,7 +23,6 @@ class Mapzer(Bd):
         """
         colunas = ['id', 'Nome', 'Rua', 'Numero_rua', 'Bairro', 'Cidade', 'Estado', 'Data']
         lista_dados = list(zip(colunas, Bd.listar(self, data=self.data)))
-        # dados = {}
 
         for c in lista_dados:
             self.dados[c[0]] = c[1]
