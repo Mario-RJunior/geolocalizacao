@@ -57,7 +57,6 @@ class Mapzer(Bd):
         """
         Função que faz o agrupamento dos pacientes a partir da sua localização.
         :param dataframe: Dataframe que possue endereço dos clientes.
-        :param num_equipes: Número de grupos em que se deseja agrupar os pacientes.
         :return: Dataframe com colunas extras para latitude, longitute e grupo a qual o paciente foi associado.
         """
 
@@ -101,7 +100,6 @@ class Mapzer(Bd):
         """
         Função para plotar o mapa com as localizações dos endereços.
         :param dataframe: Dataframe que possui as coordenadas geográficas dos endereços.
-        :param origem: Endereço de origem das visitas.
         :return: Retorna o respectivo mapa.
         """
 
@@ -143,7 +141,6 @@ class Mapzer(Bd):
         """
         Função para calcular as distâncias entre os endereços e o ponto de origem.
         :param dataframe: Dataframe que contém os dados necessários.
-        :param origem: Endereço de origem das visitas.
         :return: Lista com dicionários contendo endereço e distância calculada a partir da do ponto de origem, divididas pelos grupos.
         """
 
@@ -194,7 +191,6 @@ class Mapzer(Bd):
         """
         Função que retorna distâncias máximas e mínimas de cada rota.
         :param dataframe: Dataframe atualizado.
-        :param origem: Ponto de partida para as visitas.
         :param maximo: Indica se queremos retornar as distâncias máximas ou mínimas. Se True = máxima, se False = mínima.
         :return: Lista com os endereços com suas respectivas distâncas.
         """
