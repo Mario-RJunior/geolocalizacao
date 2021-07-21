@@ -1,6 +1,7 @@
 import streamlit as st
 from geolocalizador import Mapzer
 from streamlit_folium import folium_static
+from multiprocessing.pool import ThreadPool
 
 st.title('Mapzer App')
 st.sidebar.title('Menu')
