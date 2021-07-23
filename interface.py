@@ -36,6 +36,11 @@ if __name__ == '__main__':
             st.markdown(f'## Mapa')
             folium_static(mapa)
 
+            legenda_equipes = [f'Equipe {c}' for c in range(1, equipes + 1)]
+
+            num_equipes = st.radio('Selecione uma trajetória',
+                                   legenda_equipes)
+
             # lista_rotas = m.calcula_distancias(df)
             # grupos_end = m.retorna_rotas(lista_rotas)
             # dist_max = m.distancias_min_max(df)
