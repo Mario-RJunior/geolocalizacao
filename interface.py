@@ -35,28 +35,29 @@ if __name__ == '__main__':
         else:
             st.markdown(f'## Mapa')
             folium_static(mapa)
-            lista_rotas = m.calcula_distancias(df)
-            grupos_end = m.retorna_rotas(lista_rotas)
-            dist_max = m.distancias_min_max(df)
-            dist_min = m.distancias_min_max(df, maximo=False)
 
-            st.markdown(f'## Trajetórias')
+            # lista_rotas = m.calcula_distancias(df)
+            # grupos_end = m.retorna_rotas(lista_rotas)
+            # dist_max = m.distancias_min_max(df)
+            # dist_min = m.distancias_min_max(df, maximo=False)
 
-            cont = 0
-            for r, e in grupos_end.items():
-                texto = ''
-                st.markdown(f'### {r}')
+            # st.markdown(f'## Trajetórias')
 
-                for i in range(len(e)):
-                    texto += f'{e[i]} '
+            # cont = 0
+            # for r, e in grupos_end.items():
+            #     texto = ''
+            #     st.markdown(f'### {r}')
 
-                    if i != len(e) - 1:
-                        texto += '-> '
+            # for i in range(len(e)):
+            #     texto += f'{e[i]} '
 
-                st.markdown(f'- {texto.strip()}.')
+            #     if i != len(e) - 1:
+            #         texto += '-> '
 
-                st.markdown(f'Distânca máxima: {str(round(dist_max[cont], 2)).replace(".", ",")} Km.')
-                st.markdown(f'Distânca mínima: {str(round(dist_min[cont], 2)).replace(".", ",")} Km.')
-                st.markdown(f'Economia de {str(round(dist_max[cont] - dist_min[cont], 2)).replace(".", ",")} Km.')
+            # st.markdown(f'- {texto.strip()}.')
 
-                cont += 1
+            # st.markdown(f'Distânca máxima: {str(round(dist_max[cont], 2)).replace(".", ",")} Km.')
+            # st.markdown(f'Distânca mínima: {str(round(dist_min[cont], 2)).replace(".", ",")} Km.')
+            # st.markdown(f'Economia de {str(round(dist_max[cont] - dist_min[cont], 2)).replace(".", ",")} Km.')
+
+            # cont += 1
