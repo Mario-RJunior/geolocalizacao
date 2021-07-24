@@ -36,7 +36,7 @@ if __name__ == '__main__':
             st.markdown(f'## Mapa')
             folium_static(mapa)
 
-            legenda_equipes = [f'Equipe {c}' for c in range(1, equipes + 1)]
+            legenda_equipes = [f'Equipe {c}' if c != 0 else 'Todas as equipes' for c in range(0, equipes + 1)]
 
             num_equipes = st.radio('Selecione uma trajetória',
                                    legenda_equipes)
