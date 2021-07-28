@@ -11,8 +11,14 @@ origem = st.sidebar.selectbox('Endereço de origem', ['Selecione um endereço',
 data = st.sidebar.date_input('Data')
 equipes = st.sidebar.selectbox('Número de equipes', [1, 2, 3, 4, 5, 6, 7])
 
+legenda_equipes = [f'Equipe {c}' if c != 0 else 'Todas as equipes' \
+    for c in range(0, equipes + 1)]
+
+num_equipes = st.sidebar.radio('Selecione uma trajetória', legenda_equipes)
+
 if __name__ == '__main__':
     m = Mapzer(origem, data, equipes)
+
     try:
         bd = m.acessa_bd()
 
@@ -24,7 +30,7 @@ if __name__ == '__main__':
         df = m.agrupa_visitas(df)
 
         try:
-            mapa = m.map_plot(df)
+            mapa = m.map_plot(df, legenda_equipes.index(num_equipes))
 
         except KeyError:
             st.write('Não há visitas previstas nesta data.')
@@ -34,12 +40,7 @@ if __name__ == '__main__':
 
         else:
             st.markdown(f'## Mapa')
-            folium_static(mapa)
-
-            legenda_equipes = [f'Equipe {c}' if c != 0 else 'Todas as equipes' for c in range(0, equipes + 1)]
-
-            num_equipes = st.radio('Selecione uma trajetória',
-                                   legenda_equipes)
+            folium_static(mapa)          
 
             # lista_rotas = m.calcula_distancias(df)
             # grupos_end = m.retorna_rotas(lista_rotas)
