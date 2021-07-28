@@ -115,9 +115,6 @@ class Mapzer(Bd):
             if equipe != 0:
                 dataframe = dataframe.query(f'equipes == {equipe}')   
 
-            else:
-                pass
-
             lat = dataframe['latitude'].to_list()
             lon = dataframe['longitude'].to_list()
             equipes = dataframe['equipes'].to_list()
