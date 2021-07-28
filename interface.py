@@ -11,11 +11,13 @@ origem = st.sidebar.selectbox('Endereço de origem', ['Selecione um endereço',
 data = st.sidebar.date_input('Data')
 equipes = st.sidebar.selectbox('Número de equipes', [1, 2, 3, 4, 5, 6, 7])
 
+# UndefinedVariableError 
 legenda_equipes = [f'Equipe {c}' if c != 0 else 'Todas as equipes' \
-    for c in range(0, equipes + 1)]
+        for c in range(0, equipes + 1)]
 
-# UndefinedVariableError
 num_equipes = st.sidebar.radio('Selecione uma trajetória', legenda_equipes)
+
+UndefinedVariableError = ''
 
 if __name__ == '__main__':
     m = Mapzer(origem, data, equipes)
@@ -38,6 +40,9 @@ if __name__ == '__main__':
 
         except AttributeError:
             st.write('Selecione um endereço válido.')
+
+        except NameError:
+            st.write('Preencha as opções anteriores corretamente.')
 
         else:
             st.markdown(f'## Mapa')
