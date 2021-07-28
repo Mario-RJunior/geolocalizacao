@@ -14,6 +14,7 @@ equipes = st.sidebar.selectbox('Número de equipes', [1, 2, 3, 4, 5, 6, 7])
 legenda_equipes = [f'Equipe {c}' if c != 0 else 'Todas as equipes' \
     for c in range(0, equipes + 1)]
 
+# UndefinedVariableError
 num_equipes = st.sidebar.radio('Selecione uma trajetória', legenda_equipes)
 
 if __name__ == '__main__':
