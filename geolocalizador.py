@@ -87,6 +87,7 @@ class Mapzer(Bd):
 
                 previsoes = clustering.fit_predict(x)
                 dataframe['equipes'] = previsoes
+                dataframe['equipes'] = dataframe['equipes'].apply(lambda x: x + 1)
 
         except TypeError:
 
@@ -96,19 +97,26 @@ class Mapzer(Bd):
 
             return dataframe
 
-    def map_plot(self, dataframe):
+    def map_plot(self, dataframe, equipe):
         """
         Função para plotar o mapa com as localizações dos endereços.
         :param dataframe: Dataframe que possui as coordenadas geográficas dos endereços.
         :return: Retorna o respectivo mapa.
         """
-
         try:
 
-            paleta_cores = ('blue', 'orange', 'darkred', 'pink', 'darkpurple', 'cadetblue',
-                            'lightred', 'darkgreen', 'purple', 'darkblue', 'black', 'red',
-                            'lightblue', 'beige', 'green', 'lightgray', 'lightgreen', 'gray',
-                            'white')
+            paleta_cores = (
+                'blue', 'orange', 'darkred', 'pink', 'darkpurple', 'cadetblue',
+                'lightred', 'darkgreen', 'purple', 'darkblue', 'black', 'red',
+                'lightblue', 'beige', 'green', 'lightgray', 'lightgreen', 'gray',
+                'white'
+                )
+
+            if equipe != 0:
+                dataframe = dataframe.query(f'equipes == {equipe}')   
+
+            else:
+                pass
 
             lat = dataframe['latitude'].to_list()
             lon = dataframe['longitude'].to_list()
@@ -116,27 +124,27 @@ class Mapzer(Bd):
             coord_origem = self.converte_endereco(self.origem)
 
             coordenadas = list(zip(lat, lon, equipes))
-
             m = folium.Map(location=[-20.2999473, -40.3221028], zoom_start=12)
 
             for loc in coordenadas:
                 folium.Marker(location=(loc[0], loc[1]),
-                              icon=folium.Icon(color=paleta_cores[loc[2]], icon='user', prefix="fa"),
-                              popup=f'Equipe {loc[2] + 1}'
-                              ).add_to(m)
+                            icon=folium.Icon(color=paleta_cores[loc[2]], icon='user', prefix="fa"),
+                            popup=f'Equipe {loc[2]}'
+                            ).add_to(m)
 
             folium.Marker(location=(coord_origem[0], coord_origem[1]),
-                          icon=folium.Icon(color='darkgreen', icon='medkit', prefix="fa"),
-                          popup='Origem'
-                          ).add_to(m)
+                        icon=folium.Icon(color='darkgreen', icon='medkit', prefix="fa"),
+                        popup='Origem'
+                        ).add_to(m)
 
         except TypeError:
 
             print('Erro ao gerar o mapa. Tente novamente.')
 
         else:
-            return m
 
+            return m
+    
     def calcula_distancias(self, dataframe):
         """
         Função para calcular as distâncias entre os endereços e o ponto de origem.
