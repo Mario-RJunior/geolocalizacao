@@ -48,28 +48,54 @@ if __name__ == '__main__':
             st.markdown(f'## Mapa')
             folium_static(mapa)          
 
-            # lista_rotas = m.calcula_distancias(df)
-            # grupos_end = m.retorna_rotas(lista_rotas)
-            # dist_max = m.distancias_min_max(df)
-            # dist_min = m.distancias_min_max(df, maximo=False)
+            lista_rotas = m.calcula_distancias(df)
+            grupos_end = m.retorna_rotas(lista_rotas)
 
-            # st.markdown(f'## Trajetórias')
+            
 
-            # cont = 0
-            # for r, e in grupos_end.items():
-            #     texto = ''
-            #     st.markdown(f'### {r}')
+            if legenda_equipes.index(num_equipes) != 0:
+                st.markdown(f'## Trajetória')
+                r = grupos_end[f'Equipe {legenda_equipes.index(num_equipes)}']
 
-            # for i in range(len(e)):
-            #     texto += f'{e[i]} '
+                for e in r:
+                    st.write(f'- {e}')
+                
+                
+                """cont = 0
+                for r, e in grupos_end.items():
+                    texto = ''
+                    # st.markdown(f'### {r}')
+                    print(r)
+                    print()
+                    print(e)
 
-            #     if i != len(e) - 1:
-            #         texto += '-> '
+                for i in range(len(e)):
+                    texto += f'{e[i]} '
 
-            # st.markdown(f'- {texto.strip()}.')
+                if i != len(e) - 1:
+                    texto += '-> '
+                st.markdown(f'- {texto.strip()}.')"""
+            """
+            dist_max = m.distancias_min_max(df)
+            dist_min = m.distancias_min_max(df, maximo=False)
 
-            # st.markdown(f'Distânca máxima: {str(round(dist_max[cont], 2)).replace(".", ",")} Km.')
-            # st.markdown(f'Distânca mínima: {str(round(dist_min[cont], 2)).replace(".", ",")} Km.')
-            # st.markdown(f'Economia de {str(round(dist_max[cont] - dist_min[cont], 2)).replace(".", ",")} Km.')
+            st.markdown(f'## Trajetórias')
 
-            # cont += 1
+            cont = 0
+            for r, e in grupos_end.items():
+                texto = ''
+                st.markdown(f'### {r}')
+
+            for i in range(len(e)):
+                texto += f'{e[i]} '
+
+                if i != len(e) - 1:
+                    texto += '-> '
+
+            st.markdown(f'- {texto.strip()}.')
+
+            st.markdown(f'Distânca máxima: {str(round(dist_max[cont], 2)).replace(".", ",")} Km.')
+            st.markdown(f'Distânca mínima: {str(round(dist_min[cont], 2)).replace(".", ",")} Km.')
+            st.markdown(f'Economia de {str(round(dist_max[cont] - dist_min[cont], 2)).replace(".", ",")} Km.')
+
+            cont += 1"""
