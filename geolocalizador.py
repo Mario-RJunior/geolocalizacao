@@ -181,50 +181,46 @@ class Mapzer(Bd):
 
         return dic_rotas_ordenadas
 
-    def distancias_min_max(self, dataframe, maximo=True):
+    def distancias_min_max(self, dataframe, equipe, maximo=True):
         """
         Função que retorna distâncias máximas e mínimas de cada rota.
         :param dataframe: Dataframe atualizado.
         :param maximo: Indica se queremos retornar as distâncias máximas ou mínimas. Se True = máxima, se False = mínima.
         :return: Lista com os endereços com suas respectivas distâncas.
         """
-
-        grupos = np.sort(dataframe['equipes'].unique())
+        df = dataframe.query(f'equipes == {equipe}')
         lista_distancias = []
         dist_min_max = []
 
-        for g in grupos:
+        inicio = self.origem
+        enderecos = df['endereco_completo'].to_list()
+        dic_temp = {}
+        dic = {}
+        min_dist = 0
 
-            inicio = self.origem
-            df = dataframe.query(f'equipes == {g}')
-            enderecos = df['endereco_completo'].to_list()
-            dic_temp = {}
-            dic = {}
-            min_dist = 0
+        while len(enderecos) > 0:
 
-            while len(enderecos) > 0:
+            for end in enderecos:
+                coord_inicio = self.converte_endereco(inicio)
+                coord = self.converte_endereco(end)
+                distancia = geopy.distance.distance(coord_inicio, coord).km
 
-                for end in enderecos:
-                    coord_inicio = self.converte_endereco(inicio)
-                    coord = self.converte_endereco(end)
-                    distancia = geopy.distance.distance(coord_inicio, coord).km
+                dic_temp[end] = distancia
 
-                    dic_temp[end] = distancia
+            if maximo:
+                mais_perto = max(dic_temp, key=dic_temp.get)
 
-                if maximo:
-                    mais_perto = max(dic_temp, key=dic_temp.get)
+            else:
+                mais_perto = min(dic_temp, key=dic_temp.get)
 
-                else:
-                    mais_perto = min(dic_temp, key=dic_temp.get)
+            dic[mais_perto] = dic_temp[mais_perto]
+            inicio = mais_perto
 
-                dic[mais_perto] = dic_temp[mais_perto]
-                inicio = mais_perto
+            min_dist += dic_temp[mais_perto]
+            dic_temp.clear()
+            enderecos.remove(mais_perto)
 
-                min_dist += dic_temp[mais_perto]
-                dic_temp.clear()
-                enderecos.remove(mais_perto)
-
-            lista_distancias.append(dic)
+        lista_distancias.append(dic)
 
         for d in lista_distancias:
             soma = 0
@@ -232,7 +228,7 @@ class Mapzer(Bd):
                 soma += v
             dist_min_max.append(soma)
 
-        return dist_min_max
+        return dist_min_max[0]
 
     def gera_log(self, erro):
         """
