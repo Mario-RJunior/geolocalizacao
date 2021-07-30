@@ -16,6 +16,7 @@ legenda_equipes = [f'Equipe {c}' if c != 0 else 'Todas as equipes' \
         for c in range(0, equipes + 1)]
 
 num_equipes = st.sidebar.radio('Selecione uma trajetória', legenda_equipes)
+n = legenda_equipes.index(num_equipes)
 
 UndefinedVariableError = ''
 
@@ -33,7 +34,7 @@ if __name__ == '__main__':
         df = m.agrupa_visitas(df)
 
         try:
-            mapa = m.map_plot(df, legenda_equipes.index(num_equipes))
+            mapa = m.map_plot(df, n)
 
         except KeyError:
             st.write('Não há visitas previstas nesta data.')
@@ -46,56 +47,23 @@ if __name__ == '__main__':
 
         else:
             st.markdown(f'## Mapa')
-            folium_static(mapa)          
+            folium_static(mapa)                      
 
-            lista_rotas = m.calcula_distancias(df)
-            grupos_end = m.retorna_rotas(lista_rotas)
+            if n != 0:
+                lista_rotas = m.calcula_distancias(df, n)
+                grupos_end = m.retorna_rotas(lista_rotas, n)
 
-            
-
-            if legenda_equipes.index(num_equipes) != 0:
                 st.markdown(f'## Trajetória')
-                r = grupos_end[f'Equipe {legenda_equipes.index(num_equipes)}']
 
-                for e in r:
-                    st.write(f'- {e}')
-                
-                
-                """cont = 0
-                for r, e in grupos_end.items():
-                    texto = ''
-                    # st.markdown(f'### {r}')
-                    print(r)
-                    print()
-                    print(e)
+                for g, e in grupos_end.items():
+                    for end in e:
+                        st.write(f'- {end}')
 
-                for i in range(len(e)):
-                    texto += f'{e[i]} '
+                dist_max = m.distancias_min_max(df, n)
+                dist_min = m.distancias_min_max(df, n, False)
 
-                if i != len(e) - 1:
-                    texto += '-> '
-                st.markdown(f'- {texto.strip()}.')"""
-            """
-            dist_max = m.distancias_min_max(df)
-            dist_min = m.distancias_min_max(df, maximo=False)
+                st.markdown('## Distâncias')
 
-            st.markdown(f'## Trajetórias')
-
-            cont = 0
-            for r, e in grupos_end.items():
-                texto = ''
-                st.markdown(f'### {r}')
-
-            for i in range(len(e)):
-                texto += f'{e[i]} '
-
-                if i != len(e) - 1:
-                    texto += '-> '
-
-            st.markdown(f'- {texto.strip()}.')
-
-            st.markdown(f'Distânca máxima: {str(round(dist_max[cont], 2)).replace(".", ",")} Km.')
-            st.markdown(f'Distânca mínima: {str(round(dist_min[cont], 2)).replace(".", ",")} Km.')
-            st.markdown(f'Economia de {str(round(dist_max[cont] - dist_min[cont], 2)).replace(".", ",")} Km.')
-
-            cont += 1"""
+                st.markdown(f'Distância máxima: {str(round(dist_max, 2)).replace(".", ",")} Km.')
+                st.markdown(f'Distância mínima: {str(round(dist_min, 2)).replace(".", ",")} Km.')
+                st.markdown(f'Economia de {str(round(dist_max - dist_min, 2)).replace(".", ",")} Km.')
