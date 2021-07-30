@@ -160,10 +160,7 @@ class Mapzer(Bd):
 
         return lista_grupos
 
-
-        return df
-
-    def retorna_rotas(self, rotas):
+    def retorna_rotas(self, rotas, equipe):
         """
         Função que recebe um lista com as rotas e ordena os endereços de forma crescente das distâncias.
         :param rotas: Lista com os endereços e suas distâncias.
@@ -172,16 +169,14 @@ class Mapzer(Bd):
 
         dic_rotas_ordenadas = {}
         rotas_temp = []
-        cont = 0
 
         for r in rotas:
-            cont += 1
             rota_ordenada = sorted(r.items(), key=lambda x: x[1])
 
             for ro in rota_ordenada:
                 rotas_temp.append(ro[0])
 
-            dic_rotas_ordenadas[f'Equipe {cont}'] = rotas_temp.copy()
+            dic_rotas_ordenadas[f'Equipe {equipe}'] = rotas_temp.copy()
             rotas_temp.clear()
 
         return dic_rotas_ordenadas
