@@ -101,6 +101,7 @@ class Mapzer(Bd):
         """
         Função para plotar o mapa com as localizações dos endereços.
         :param dataframe: Dataframe que possui as coordenadas geográficas dos endereços.
+        :param equipe: Número da equipe que desejamos mostrar no gráfico.
         :return: Retorna o respectivo mapa.
         """
         try:
