@@ -165,6 +165,7 @@ class Mapzer(Bd):
         """
         Função que recebe um lista com as rotas e ordena os endereços de forma crescente das distâncias.
         :param rotas: Lista com os endereços e suas distâncias.
+        :param equipe: Número da equipe a qual queremos a rota.
         :return: Lista com os endereços ordenados pela distância.
         """
 
