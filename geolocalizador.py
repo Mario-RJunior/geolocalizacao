@@ -10,11 +10,11 @@ from datetime import datetime
 
 class Mapzer(Bd):
 
-    def __init__(self, origem, data, quantidade):
-        self.origem = origem
-        self.data = data
-        self.quantidade = quantidade
-        self.dados = {}
+    def __init__(self, origem: str, data: str, quantidade: int) -> None:
+        self.origem: str = origem
+        self.data: str = data
+        self.quantidade: str = quantidade
+        self.dados: dict = {}
 
     def acessa_bd(self):
         """
