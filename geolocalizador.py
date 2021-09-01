@@ -53,7 +53,7 @@ class Mapzer(Bd):
 
         return loc.latitude, loc.longitude
 
-    def agrupa_visitas(self, dataframe):
+    def agrupa_visitas(self, dataframe: pd.core.frame.DataFrame) -> pd.core.frame.DataFrame:
         """
         Função que faz o agrupamento dos pacientes a partir da sua localização.
         :param dataframe: Dataframe que possue endereço dos clientes.
@@ -62,7 +62,7 @@ class Mapzer(Bd):
 
         try:
 
-            serie = dataframe['endereco_completo'].apply(self.converte_endereco)
+            serie: pd.core.series.Series = dataframe['endereco_completo'].apply(self.converte_endereco)
 
             dataframe['latitude'] = serie.apply(lambda lat: lat[0])
             dataframe['longitude'] = serie.apply(lambda lon: lon[1])
