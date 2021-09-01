@@ -29,16 +29,16 @@ class Mapzer(Bd):
 
         return self.dados
 
-    def gera_dataframe(self):
+    def gera_dataframe(self) -> pd.core.frame.DataFrame:
         """
         Função que gera um dataframe a partir das informações do banco de dados.
         :return: Dataframe completo com informações do banco de dados.
         """
-        dataframe = pd.DataFrame(self.dados)
+        dataframe: pd.core.frame.DataFrame = pd.DataFrame(self.dados)
         dataframe['endereco_completo'] = \
             dataframe['Rua'].astype(str) + ', ' + dataframe['Numero_rua'].astype(str) + ', ' + \
             dataframe['Cidade'].astype(str) + ' - ' + dataframe['Estado'].astype(str)
-
+        
         return dataframe
 
     def converte_endereco(self, endereco):
