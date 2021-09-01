@@ -16,13 +16,13 @@ class Mapzer(Bd):
         self.quantidade: str = quantidade
         self.dados: dict = {}
 
-    def acessa_bd(self):
+    def acessa_bd(self) -> dict:
         """
         Função que chama a função listar e filtra as informações do banco de dados pela data recebida.
         :return: Retorna um dicionário com os dados do banco de dados.
         """
-        colunas = ['id', 'Nome', 'Rua', 'Numero_rua', 'Bairro', 'Cidade', 'Estado', 'Data']
-        lista_dados = list(zip(colunas, Bd.listar(self, data=self.data)))
+        colunas: list = ['id', 'Nome', 'Rua', 'Numero_rua', 'Bairro', 'Cidade', 'Estado', 'Data']
+        lista_dados: list = list(zip(colunas, Bd.listar(self, data=self.data)))
 
         for c in lista_dados:
             self.dados[c[0]] = c[1]
