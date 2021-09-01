@@ -143,12 +143,12 @@ class Mapzer(Bd):
 
             return m
        
-    def calcula_distancias(self, dataframe, equipe):
-        lista_grupos = []
-        df = dataframe.query(f'equipes == {equipe}')
-        inicio = self.origem
-        enderecos = df['endereco_completo'].to_list()
-        dic = {}
+    def calcula_distancias(self, dataframe: pd.core.frame.DataFrame, equipe: int) -> list:
+        lista_grupos: list = []
+        df: pd.core.frame.DataFrame = dataframe.query(f'equipes == {equipe}')
+        inicio: str = self.origem
+        enderecos: list = df['endereco_completo'].to_list()
+        dic: dict = {}
         
         for end in enderecos:
             coord_inicio = self.converte_endereco(inicio)
