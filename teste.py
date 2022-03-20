@@ -15,7 +15,7 @@ df = m.agrupa_visitas(df)
 
 print(df)
 
-t = time.time() - t0
+t = time.time() - t0 # 17.962785482406616 segundos
 print(f'Tempo total: {t}')
 
 """
