@@ -1,8 +1,11 @@
 from geolocalizador import Mapzer
+import time
 
 origem = 'Av. Cezar Hilal, 700, Vitória - ES'
 data = '2021/03/20'
 equipes = 3
+
+t0 = time.time()
 
 m = Mapzer(origem, data, equipes)
 
@@ -12,6 +15,10 @@ df = m.agrupa_visitas(df)
 
 print(df)
 
+t = time.time() - t0
+print(f'Tempo total: {t}')
+
+"""
 enderecos = ['Rua Hermes Bastos, 40, Vitória - ES',
              'Avenida Américo Buaiz, 200, Vitória - ES',
              'Avenida Vitória, 1690, Vitória - ES',
@@ -30,5 +37,5 @@ for e in enderecos:
     x = m.converte_endereco(e)
     print(x[0], x[1])
 
-"""x = m.converte_endereco('Rua Meridional, 200 - Alto Lage, Cariacica - ES')
+x = m.converte_endereco('Rua Meridional, 200 - Alto Lage, Cariacica - ES')
 print(x[0], x[1])"""
